@@ -42,8 +42,12 @@ public class MainActivity extends ActionBarActivity {
         //ListViewにアダプターをセット。
         //listView.setAdapter(mAdapter);
         //一覧のデータを作成して表示します。
+
+        //GridViewのViewを取得
         GridView gridView= (GridView) findViewById(R.id.mylist);
+        //GridViewにアダプターをセット。
         gridView.setAdapter(mAdapter);
+        //GridViewのViewを取得
         fetch();
 
     }
