@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.GridView;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -37,10 +38,12 @@ public class MainActivity extends ActionBarActivity {
         mAdapter = new MessageRecordsAdapter(this);
 
         //ListViewのViewを取得
-        ListView listView = (ListView) findViewById(R.id.mylist);
+        //ListView listView = (ListView) findViewById(R.id.mylist);
         //ListViewにアダプターをセット。
-        listView.setAdapter(mAdapter);
+        //listView.setAdapter(mAdapter);
         //一覧のデータを作成して表示します。
+        GridView gridView= (GridView) findViewById(R.id.mylist);
+        gridView.setAdapter(mAdapter);
         fetch();
 
     }
@@ -48,7 +51,7 @@ public class MainActivity extends ActionBarActivity {
     private void fetch() {
         //jsonデータをサーバーから取得する通信機能です。Volleyの機能です。通信/Users/MOOG/Downloads/MainActivity.javaクラスのインスタンスを作成しているだけです。通信はまだしていません。
         JsonObjectRequest request = new JsonObjectRequest(
-                "http://gashfara.com/test/json.txt" ,//jsonデータが有るサーバーのURLを指定します。
+                "http://spica-travel.com/json.txt" ,//jsonデータが有るサーバーのURLを指定します。
                 null,
                 //サーバー通信した結果、成功した時の処理をするクラスを作成しています。１度きりなのでここに書いてる
                 new Response.Listener<JSONObject>() {
