@@ -7,7 +7,6 @@ import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.GridView;
-import android.widget.ListView;
 import android.widget.Toast;
 
 import com.android.volley.Response;
@@ -31,33 +30,30 @@ public class MainActivity extends ActionBarActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //メイン画面のレイアウトをセットしています。ListView
+        //メイン画面のレイアウトをセットしています。GridView
         setContentView(R.layout.activity_main);
 
         //アダプターを作成します。newでクラスをインスタンス化しています。
         mAdapter = new MessageRecordsAdapter(this);
 
-        //ListViewのViewを取得
-        //ListView listView = (ListView) findViewById(R.id.mylist);
-        //ListViewにアダプターをセット。
-        //listView.setAdapter(mAdapter);
-        //一覧のデータを作成して表示します。
-
         //GridViewのViewを取得
-        GridView gridView= (GridView) findViewById(R.id.mylist);
+        GridView gridView = (GridView) findViewById(R.id.mylist);
         //GridViewにアダプターをセット。
         gridView.setAdapter(mAdapter);
-        //GridViewのViewを取得
+
+        gridView.setVerticalSpacing(30);
+        gridView.setHorizontalSpacing(30);
+        //一覧のデータを作成して表示します。
         fetch();
 
     }
     //自分で作った関数です。一覧のデータを作成して表示します。
     private void fetch() {
-        //jsonデータをサーバーから取得する通信機能です。Volleyの機能です。通信/Users/MOOG/Downloads/MainActivity.javaクラスのインスタンスを作成しているだけです。通信はまだしていません。
+        //jsonデータをサーバーから取得する通信機能です。Volleyの機能です。通信クラスのインスタンスを作成しているだけです。通信はまだしていません。
         JsonObjectRequest request = new JsonObjectRequest(
                 "http://spica-travel.com/json.txt" ,//jsonデータが有るサーバーのURLを指定します。
                 null,
-                //サーバー通信した結果、成功した時の処理をするクラスを作成しています。１度きりなのでここに書いてる
+                //サーバー通信した結果、成功した時の処理をするクラスを作成しています。
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject jsonObject) {
@@ -97,10 +93,12 @@ public class MainActivity extends ActionBarActivity {
             //１つだけ取り出します。
             JSONObject jsonMessage = jsonMessages.getJSONObject(i);
             //jsonの値を取得します。
-            String title = jsonMessage.getString("comment");
+            String comment = jsonMessage.getString("comment");
+            String title = jsonMessage.getString("title");
+            String author = jsonMessage.getString("author");
             String url = jsonMessage.getString("imageUrl");
             //jsonMessageを新しく作ります。
-            MessageRecord record = new MessageRecord(url, title);
+            MessageRecord record = new MessageRecord(url, title , author, comment);
             //MessageRecordの配列に追加します。
             records.add(record);
         }

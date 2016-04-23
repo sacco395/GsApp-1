@@ -17,11 +17,11 @@ import java.util.List;
 public class MessageRecordsAdapter extends ArrayAdapter<MessageRecord> {
     private ImageLoader mImageLoader;
 
-    //アダプターを作成する関数。コンストラクター。クラス名と同じです。contexはアプリケーションそのもののクラス
+    //アダプターを作成する関数。コンストラクター。クラス名と同じです。
     public MessageRecordsAdapter(Context context) {
         //レイアウトのidmessage_itemのViewを親クラスに設定している
         super(context, R.layout.message_item);
-        //キャッシュメモリを確保して画像を取得するクラスを作成。これを使って画像をダウンロードする。Volleyの機能、クラスならnew
+        //キャッシュメモリを確保して画像を取得するクラスを作成。これを使って画像をダウンロードする。Volleyの機能
         mImageLoader = new ImageLoader(VolleyApplication.getInstance().getRequestQueue(), new BitmapLruCache());
     }
     //表示するViewを返します。これがListVewの１つのセルとして表示されます。表示されるたびに実行されます。
@@ -34,15 +34,20 @@ public class MessageRecordsAdapter extends ArrayAdapter<MessageRecord> {
 
         //レイアウトにある画像と文字のViewを所得します。
         NetworkImageView imageView = (NetworkImageView) convertView.findViewById(R.id.image1);
-        TextView textView = (TextView) convertView.findViewById(R.id.text1);
+        TextView textView1 = (TextView) convertView.findViewById(R.id.title1);
+        TextView textView2 = (TextView) convertView.findViewById(R.id.author1);
+        TextView textView3 = (TextView) convertView.findViewById(R.id.text1);
 
-        //表示するセルの位置からデータをMessageRecordのデータを取得します。
+        //表示するセルの位置からデータをMessageRecordのデータを取得します
         MessageRecord imageRecord = getItem(position);
 
         //mImageLoaderを使って画像をダウンロードし、Viewにセットします。
         imageView.setImageUrl(imageRecord.getImageUrl(), mImageLoader);
         //Viewに文字をセットします。
-        textView.setText(imageRecord.getComment());
+        textView1.setText(imageRecord.getTitle());
+        textView2.setText(imageRecord.getAuthor());
+        textView3.setText(imageRecord.getComment());
+
         //1つのセルのViewを返します。
         return convertView;
     }
@@ -51,7 +56,6 @@ public class MessageRecordsAdapter extends ArrayAdapter<MessageRecord> {
         //ArrayAdapterを空にする。
         clear();
         //テータの数だけMessageRecordを追加します。
-        //１つ１つのデータobject を追加していく
         for(MessageRecord object : objects) {
             add(object);
         }
