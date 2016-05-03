@@ -1,6 +1,6 @@
 //http://oigami.hatenablog.com/entry/2014/11/08/082615 をそのまま利用しています。
 //TextViewのリンクで自由にプログラムを制御するには複雑なので、誰かが作ったクラスを利用したりします。使い方だけ覚えればOK.
-package com.gashfara.mogi.gsapp;
+package com.spica_travel.taku.gsapp;
 
 import android.net.Uri;
 import android.text.Layout;

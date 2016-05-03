@@ -2,7 +2,12 @@
 package com.spica_travel.taku.gsapp;
 
 import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
+import android.text.Spannable;
+import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
@@ -37,6 +42,48 @@ public class MessageRecordsAdapter extends ArrayAdapter<MessageRecord> {
         TextView textView1 = (TextView) convertView.findViewById(R.id.title1);
         TextView textView2 = (TextView) convertView.findViewById(R.id.author1);
         TextView textView3 = (TextView) convertView.findViewById(R.id.text1);
+
+        //webリンクを制御するプログラムはここから
+        // TextView に LinkMovementMethod を登録します
+        //TextViewをタップした時のイベントリスナー（タップの状況を監視するクラス）を登録します。onTouchにタップした時の処理を記述します。buttonやほかのViewも同じように記述できます。
+        textView3.setOnTouchListener(new ViewGroup.OnTouchListener() {
+            //タップした時の処理
+            @Override
+            public boolean onTouch(final View view, MotionEvent event) {
+                //タップしたのはTextViewなのでキャスト（型の変換）する
+                TextView textView = (TextView) view;
+                //リンクをタップした時に処理するクラスを作成。AndroidSDKにあるLinkMovementMethodを拡張しています。
+                MutableLinkMovementMethod m = new MutableLinkMovementMethod();
+                //MutableLinkMovementMethodのイベントリスナーをさらにセットしています。
+                m.setOnUrlClickListener(new MutableLinkMovementMethod.OnUrlClickListener() {
+                    //リンクをクリックした時の処理
+                    public void onUrlClick(TextView v,Uri uri) {
+                        Log.d("myurl", uri.toString());//デバッグログを出力します。
+                        // Intent のインスタンスを取得する。view.getContext()でViewの自分のアクティビティーのコンテキストを取得。遷移先のアクティビティーを.classで指定
+                        Intent intent = new Intent(view.getContext(), WebActivity.class);
+
+                        // 渡したいデータとキーを指定する。urlという名前でリンクの文字列を渡しています。
+                        intent.putExtra("url", uri.toString());
+
+                        // 遷移先の画面を呼び出す
+                        view.getContext().startActivity(intent);
+
+                    }
+                });
+                //ここからはMutableLinkMovementMethodを使うための処理なので毎回同じ感じ。
+                //リンクのチェックを行うため一時的にsetする
+                textView.setMovementMethod(m);
+                boolean mt = m.onTouchEvent(textView, (Spannable) textView.getText(), event);
+                //チェックが終わったので解除する しないと親view(listview)に行けない
+                textView.setMovementMethod(null);
+                //setMovementMethodを呼ぶとフォーカスがtrueになるのでfalseにする
+                textView.setFocusable(false);
+                //戻り値がtrueの場合は今のviewで処理、falseの場合は親view(ListView)で処理
+                return mt;
+            }
+        });
+        //webリンクを制御するプログラムはここまで
+
 
         //表示するセルの位置からデータをMessageRecordのデータを取得します
         MessageRecord imageRecord = getItem(position);
