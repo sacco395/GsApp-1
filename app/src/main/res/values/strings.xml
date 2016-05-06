@@ -7,4 +7,5 @@
     <string name="title_activity_swipe">SwipeActivity</string>
     <string name="lbl_btnToSecond">お気に入り一覧へ</string>
     <string name="lbl_btnToFirst">TOPへ</string>
+    <string name="title_activity_user">UserActivity</string>
 </resources>
