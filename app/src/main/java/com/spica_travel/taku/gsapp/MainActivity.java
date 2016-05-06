@@ -8,6 +8,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.GridView;
 import android.widget.Toast;
+import android.view.View;
+import android.content.Intent;
 
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -128,5 +130,12 @@ public class MainActivity extends ActionBarActivity {
 
         return super.onOptionsItemSelected(item);
     }
-
+    public void onClick(View view){
+        switch (view.getId()){
+            case R.id.btnToSecond:
+                Intent intent = new Intent(this, SwipeActivity.class);
+                startActivity(intent);
+                break;
+        }
+    }
 }
