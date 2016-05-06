@@ -44,7 +44,7 @@ public class MessageRecordsAdapter extends ArrayAdapter<MessageRecord> {
         TextView textView3 = (TextView) convertView.findViewById(R.id.text1);
 
         //webリンクを制御するプログラムはここから
-        // TextView に LinkMovementMethod を登録します
+        //TextView に LinkMovementMethod を登録します
         //TextViewをタップした時のイベントリスナー（タップの状況を監視するクラス）を登録します。onTouchにタップした時の処理を記述します。buttonやほかのViewも同じように記述できます。
         textView3.setOnTouchListener(new ViewGroup.OnTouchListener() {
             //タップした時の処理

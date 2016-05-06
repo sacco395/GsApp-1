@@ -23,6 +23,10 @@
             android:name=".WebActivity"
             android:label="@string/title_activity_web" >
         </activity>
+        <activity
+            android:name=".SwipeActivity"
+            android:label="@string/title_activity_swipe" >
+        </activity>
     </application>
 
 </manifest>
