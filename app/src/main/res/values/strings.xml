@@ -7,5 +7,14 @@
     <string name="title_activity_swipe">SwipeActivity</string>
     <string name="lbl_btnToSecond">お気に入り一覧へ</string>
     <string name="lbl_btnToFirst">TOPへ</string>
+    <!-- Userで追加ここから-->
+    <string name="enter_username">Enter username (3-64 length)</string>
+    <string name="enter_password">Enter password (4-50 length)</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="log_in">Log In</string>
+    <string name="operation_failed">Operation failed</string>
     <string name="title_activity_user">UserActivity</string>
+    <string name="save_data_name">DataSave</string>
+    <string name="save_token">save_token</string>
+    <!-- Userで追加ここまで-->
 </resources>

@@ -6,6 +6,7 @@ package com.spica_travel.taku.gsapp;
 import android.app.Application;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.Volley;
+import com.kii.cloud.storage.Kii;
 
 //Applicationクラスを継承extend（コピーみたいなもの）しています。Applicationの機能がそのまま使えます。{}までがクラスです。
 //これはクラスの定義です。このクラスを使うにはnewなどをしてインスタンス化（実態を作る）してから使います。
@@ -27,6 +28,7 @@ public class VolleyApplication extends Application {
         mRequestQueue = Volley.newRequestQueue(this);
         //自分自身のインスタンス（newなどでクラスを実体化したもの）そのものを代入しています。
         sInstance = this;
+
         //Userで追加ここから
         //KiiCloudの初期化。Applicationクラスで実行してください。キーは自分の値にかえる。
         Kii.initialize(getApplicationContext(), "ae7de730", "11c0deb2462b14e78845ad401b47e9ec", Kii.Site.JP);

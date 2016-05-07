@@ -29,7 +29,8 @@ public class UserActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        //自動ログインのため保存されているaccess tokenを読み出す。tokenがあればログインできる
+        //SharePreferences prefは自動ログインのため保存されているaccess tokenを読み出す。tokenがあればログインできる
+        //紫色は定数
         SharedPreferences pref = getSharedPreferences(getString(R.string.save_data_name), Context.MODE_PRIVATE);
         String token = pref.getString(getString(R.string.save_token), "");//保存されていない時は""
         //tokenがないとき。
@@ -150,7 +151,8 @@ public class UserActivity extends ActionBarActivity {
         @Override
         public void onRegisterCompleted(int token, KiiUser user, Exception e) {
             if (e == null) {
-                //自動ログインのためにSharedPreferenceに保存。アプリのストレージ。参考：http://qiita.com/Yuki_Yamada/items/f8ea90a7538234add288
+                //自動ログイン(ログイン前)のためにSharedPreferenceに保存。アプリのストレージ。参考：http://qiita.com/Yuki_Yamada/items/f8ea90a7538234add288
+                //.apply()で保存
                 SharedPreferences pref = getSharedPreferences(getString(R.string.save_data_name), Context.MODE_PRIVATE);
                 pref.edit().putString(getString(R.string.save_token), user.getAccessToken()).apply();
 
@@ -159,6 +161,7 @@ public class UserActivity extends ActionBarActivity {
                 // 遷移先の画面を呼び出す
                 startActivity(intent);
                 //戻れないようにActivityを終了します。
+                //finishがないと戻るボタンでログイン画面に戻れてしまう
                 finish();
             } else {
                 //eがKiiCloud特有のクラスを継承している時
