@@ -10,11 +10,12 @@
     <!-- Userで追加ここから-->
     <string name="enter_username">Enter username (3-64 length)</string>
     <string name="enter_password">Enter password (4-50 length)</string>
-    <string name="sign_up">Sign Up</string>
-    <string name="log_in">Log In</string>
+    <string name="sign_up">新規登録</string>
+    <string name="log_in">ログイン</string>
     <string name="operation_failed">Operation failed</string>
     <string name="title_activity_user">UserActivity</string>
     <string name="save_data_name">DataSave</string>
     <string name="save_token">save_token</string>
+    <string name="title_activity_register">RegisterActivity</string>
     <!-- Userで追加ここまで-->
 </resources>

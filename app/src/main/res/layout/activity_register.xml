@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    tools:context=".UserActivity"
+    tools:context=".RegisterActivity"
     android:orientation="vertical" >
 
     <LinearLayout
@@ -56,30 +56,19 @@
             android:paddingTop="2dip" >
 
             <Button
-                android:id="@+id/login_button"
+                android:id="@+id/signup_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal|center_vertical"
                 android:layout_weight="1"
                 android:minWidth="100dip"
-                android:text="@string/log_in"
+                android:layout_marginRight="4dip"
+                android:text="@string/sign_up"
                 android:textSize="15sp"
                 android:textStyle="bold" />
-        </LinearLayout>
 
-        <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="パスワードを忘れた方はこちらから"
-                android:id="@+id/forget_pass"
-                android:gravity="center_horizontal"
-                android:textSize="16dp"
-                android:layout_margin="5dp" />
         </LinearLayout>
     </LinearLayout>
 </LinearLayout>
+
 
