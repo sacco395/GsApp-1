@@ -77,7 +77,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="新規登録"
-                android:id="@+id/to_regibutton"
+                android:id="@+id/signup_button"
                 android:textSize="15sp"
                 android:textStyle="bold"
                 android:singleLine="true" />

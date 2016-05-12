@@ -63,6 +63,9 @@ public class UserActivity extends ActionBarActivity {
         mPasswordField.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
         //ログインボタン
         Button loginBtn = (Button) findViewById(R.id.login_button);
+        //登録ボタン
+        Button signupBtn = (Button) findViewById(R.id.signup_button);
+
         //ログインボタンをクリックした時の処理を設定
         loginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -71,6 +74,19 @@ public class UserActivity extends ActionBarActivity {
                 onLoginButtonClicked(v);
             }
         });
+
+        //登録ボタンをクリックした時の処理を設定
+        signupBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //登録画面へ移動
+                Intent intent = new Intent();
+                intent.setClassName(getPackageName(),
+                        getPackageName() + ".RegisterActivity");
+                startActivity(intent);
+            }
+        });
+
     }
     //ログイン処理：参考　http://documentation.kii.com/ja/guides/android/managing-users/sign-in/
     public void onLoginButtonClicked(View v) {
