@@ -83,6 +83,7 @@ public class PostActivity extends ActionBarActivity {
         //ギャラリーを開くインテントを作成して起動する。
         Intent intent = new Intent();
         //フアイルのタイプを設定
+        //フィルタリンしている
         intent.setType("image/*");
         //画像のインテント
         intent.setAction(Intent.ACTION_GET_CONTENT);
@@ -99,7 +100,7 @@ public class PostActivity extends ActionBarActivity {
         //startActivityForResult(Intent.createChooser(intent, "Camera"), IMAGE_CHOOSER_RESULTCODE);
         //現在時刻をもとに一時ファイル名を作成
         String filename = System.currentTimeMillis() + ".jpg";
-        //設定を保存するパラメータを作成
+        //設定を保存するパラメータを作成、以下３行がセット
         ContentValues values = new ContentValues();
         values.put(MediaStore.Images.Media.TITLE, filename);//ファイル名
         values.put(MediaStore.Images.Media.MIME_TYPE, "image/jpeg");//ファイルの種類
@@ -117,6 +118,7 @@ public class PostActivity extends ActionBarActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         //他のインテントの実行結果と区別するためstartActivityで指定した定数IMAGE_CHOOSER_RESULTCODEと一致するか確認
+        //自分の起動したアプリが動いてるかどうか確認
         if (requestCode == IMAGE_CHOOSER_RESULTCODE) {
             //失敗の時
             if (resultCode != RESULT_OK ) {
@@ -131,7 +133,7 @@ public class PostActivity extends ActionBarActivity {
                 result = mImageUri;
                 Log.d("mogi:mImageUri:",result.toString());
             }
-            //画面に画像を表示
+            //画面に画像を表示、プレビュー、コピペすればいい
             ImageView iv = (ImageView) findViewById(R.id.image_view1);
             iv.setImageURI(result);
 
@@ -169,9 +171,9 @@ public class PostActivity extends ActionBarActivity {
                 bmp.compress(Bitmap.CompressFormat.JPEG, 95, fos);
                 fos.flush();
                 fos.getFD().sync();
-            } catch (Exception e) {
+            } catch (Exception e) {//エラーの時
                 filePath = null;
-            } finally {//かならず最後に実行する処理
+            } finally {//かならず最後に閉じる実行する処理
                 if (fos != null) {
                     try {
                         //ファイルを閉じる
@@ -219,7 +221,7 @@ public class PostActivity extends ActionBarActivity {
             showAlert(getString(R.string.no_data_message));
             return;
         }
-        //画像をUPしてからmessagesに投稿。
+        //最初に画像をUPしてから次にmessagesに投稿。
         if (mImagePath != null) {
             //ファイルをUP、完了した時にpostMessagesを実行している。
             uploadFile(mImagePath);
@@ -240,6 +242,7 @@ public class PostActivity extends ActionBarActivity {
             object.set("imageUrl", url);
         }
         //データをKiiCloudに保存
+        //通信なのでコールバック。completeがセット
         object.save(new KiiObjectCallBack() {
             //保存結果が帰ってくるコールバック関数。自動的に呼び出される。
             @Override
@@ -278,7 +281,7 @@ public class PostActivity extends ActionBarActivity {
             @Override
             public void onTransferCompleted(KiiRTransfer operator, Exception e) {
                 if (e == null) {
-                    //成功の時
+                    //成功の時、エラーが起きてない時
                     //画像を一覧で表示するため、公開状態にする。参考：http://www.riaxdnp.jp/?p=6841
                     // URI指定Objをリフレッシュして、最新状態にする
                     mKiiImageObject.refresh(new KiiObjectCallBack() {
