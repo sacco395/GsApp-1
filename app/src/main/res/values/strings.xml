@@ -13,9 +13,16 @@
     <string name="sign_up">新規登録</string>
     <string name="log_in">ログイン</string>
     <string name="operation_failed">Operation failed</string>
-    <string name="title_activity_user">UserActivity</string>
+    <string name="title_activity_user">ログイン画面</string>
     <string name="save_data_name">DataSave</string>
     <string name="save_token">save_token</string>
-    <string name="title_activity_register">RegisterActivity</string>
+    <string name="title_activity_register">登録画面</string>
+    <string name="title_activity_post">PostActivity</string>
     <!-- Userで追加ここまで-->
+    <!-- Postで追加ここから-->
+    <string name="attach_button">ImageAttach</string>
+    <string name="attach_camera_button">CameraAttach</string>
+    <string name="post_button">Post</string>
+    <string name="no_data_message">No Data</string>
+    <!-- Postで追加ここまで-->
 </resources>

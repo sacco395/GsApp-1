@@ -5,6 +5,10 @@
     <item android:id="@+id/log_out"
         android:title="Log Out" />
     <!-- Userで追加ここまで-->
+    <!-- Postで追加ここから-->
+    <item android:id="@+id/post"
+        android:title="Post" />
+    <!-- Postで追加ここまで-->
     <item android:id="@+id/action_settings" android:title="@string/action_settings"
         android:orderInCategory="100" app:showAsAction="never" />
 </menu>
