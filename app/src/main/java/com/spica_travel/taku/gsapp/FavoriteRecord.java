@@ -1,32 +1,38 @@
 //1つのセルにあるデータを保存するためのデータクラスです。
 package com.spica_travel.taku.gsapp;
 
+import java.util.ArrayList;
+
+
 public class FavoriteRecord {
-    //保存するデータ全てを変数で定義します。
+    //Data Variables
     private String imageUrl;
-    private String comment;
     private String title;
     private String author;
+    private String comment;
 
-    //データを１つ作成する関数です。項目が増えたら増やしましょう。
-    public FavoriteRecord(String imageUrl, String title, String author, String comment) {
-        this.imageUrl = imageUrl;
-        this.title = title;
-        this.author = author;
-        this.comment = comment;
-    }
-    //それぞれの項目を返す関数です。項目が増えたら増やしましょう。
-    public String getComment() {
-        return comment;
-    }
 
+    //Getters and Setters
     public String getImageUrl() {
         return imageUrl;
     }
-    public String getTitle() {
-        return title;
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
+
+    public String getTitle() { return title;}
+
+    public void setTitle(String title) {this.title = title;}
+
     public String getAuthor() {
         return author;
     }
+
+    public void setAuthor(String author) {
+        this.author = author;
+    }
+    public String getComment() { return comment;}
+
+    public void setComment(String comment) {this.comment = comment;}
 }

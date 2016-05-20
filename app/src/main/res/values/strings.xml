@@ -3,8 +3,8 @@
 
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
-    <string name="title_activity_web">WebActivity</string>
-    <string name="title_activity_swipe">SwipeActivity</string>
+    <string name="title_activity_web">TOPページ</string>
+    <string name="title_activity_swipe">お気に入り一覧</string>
     <string name="lbl_btnToSecond">お気に入り一覧へ</string>
     <string name="lbl_btnToFirst">TOPへ</string>
     <!-- Userで追加ここから-->
