@@ -17,6 +17,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
+import com.github.brnunes.swipeablerecyclerview.SwipeableRecyclerViewTouchListener;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -44,6 +45,7 @@ public class SwipeActivity extends AppCompatActivity {
         //Initializing Views
         recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
         recyclerView.setHasFixedSize(true);
+
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
 
@@ -55,9 +57,9 @@ public class SwipeActivity extends AppCompatActivity {
     }
 
     //This method will get data from the web api
-    private void getData(){
+    private void getData() {
         //Showing a progress dialog
-        final ProgressDialog loading = ProgressDialog.show(this,"Loading Data", "Please wait...",false,false);
+        final ProgressDialog loading = ProgressDialog.show(this, "Loading Data", "Please wait...", false, false);
 
         //Creating a json array request
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Config.DATA_URL,
@@ -86,8 +88,8 @@ public class SwipeActivity extends AppCompatActivity {
     }
 
     //This method will parse json data
-    private void parseData(JSONArray array){
-        for(int i = 0; i<array.length(); i++) {
+    private void parseData(JSONArray array) {
+        for (int i = 0; i < array.length(); i++) {
             FavoriteRecord favoriteRecord = new FavoriteRecord();
             JSONObject json = null;
             try {
@@ -108,34 +110,65 @@ public class SwipeActivity extends AppCompatActivity {
 
         //Adding adapter to recyclerview
         recyclerView.setAdapter(adapter);
-    }
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_swipe, menu);
-        return true;
-    }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
+        SwipeableRecyclerViewTouchListener swipeTouchListener =
+                new SwipeableRecyclerViewTouchListener(recyclerView,
+                        new SwipeableRecyclerViewTouchListener.SwipeListener() {
+                            @Override
+                            public boolean canSwipe(int position) {
+                                return true;
+                            }
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
+                            @Override
+                            public void onDismissedBySwipeLeft(RecyclerView recyclerView, int[] reverseSortedPositions) {
+                                for (int position : reverseSortedPositions) {
+                                    listFavoriteRecord.remove(position);
+                                    adapter.notifyItemRemoved(position);
+                                }
+                                adapter.notifyDataSetChanged();
+                            }
 
-        return super.onOptionsItemSelected(item);
-    }
-    public void onClick(View view){
-        switch (view.getId()){
-            case R.id.btnToFirst:
-                Intent intent = new Intent(this, MainActivity.class);
-                startActivity(intent);
-                break;
-        }
+                            @Override
+                            public void onDismissedBySwipeRight(RecyclerView recyclerView, int[] reverseSortedPositions) {
+                                for (int position : reverseSortedPositions) {
+                                    listFavoriteRecord.remove(position);
+                                    adapter.notifyItemRemoved(position);
+                                }
+                                adapter.notifyDataSetChanged();
+                            }
+                        });
+
+        recyclerView.addOnItemTouchListener(swipeTouchListener);
     }
 }
+
+//    @Override
+//    public boolean onCreateOptionsMenu(Menu menu) {
+//        // Inflate the menu; this adds items to the action bar if it is present.
+//        getMenuInflater().inflate(R.menu.menu_swipe, menu);
+//        return true;
+//    }
+//
+//    @Override
+//    public boolean onOptionsItemSelected(MenuItem item) {
+//        // Handle action bar item clicks here. The action bar will
+//        // automatically handle clicks on the Home/Up button, so long
+//        // as you specify a parent activity in AndroidManifest.xml.
+//        int id = item.getItemId();
+//
+//        //noinspection SimplifiableIfStatement
+//        if (id == R.id.action_settings) {
+//            return true;
+//        }
+//
+//        return super.onOptionsItemSelected(item);
+//    }
+//    public void onClick(View view){
+//        switch (view.getId()){
+//            case R.id.btnToFirst:
+//                Intent intent = new Intent(this, MainActivity.class);
+//                startActivity(intent);
+//                break;
+//        }
+//    }
+//}

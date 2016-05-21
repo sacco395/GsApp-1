@@ -74,6 +74,7 @@
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/exploded-aar/com.android.support/recyclerview-v7/24.0.0-alpha2/jars" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/exploded-aar/com.android.support/support-v4/24.0.0-alpha2/jars" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/exploded-aar/com.example.library/android-cloud-sdk-v2.4.6/jars" />
+      <excludeFolder url="file://$MODULE_DIR$/build/intermediates/exploded-aar/com.github.brnunes/swipeablerecyclerview/1.0.0/jars" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/incremental" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/jacoco" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/javaResources" />
@@ -96,6 +97,7 @@
     <orderEntry type="library" exported="" name="recyclerview-v7-24.0.0-alpha2" level="project" />
     <orderEntry type="library" exported="" name="support-annotations-24.0.0-alpha2" level="project" />
     <orderEntry type="library" exported="" name="okio-1.6.0" level="project" />
+    <orderEntry type="library" exported="" name="swipeablerecyclerview-1.0.0" level="project" />
     <orderEntry type="library" exported="" name="android-cloud-sdk-v2.4.6-" level="project" />
     <orderEntry type="library" exported="" name="cardview-v7-24.0.0-alpha2" level="project" />
     <orderEntry type="library" exported="" name="appcompat-v7-23.1.0" level="project" />
